@@ -1,0 +1,20 @@
+def shannon_entropy(proportions):
+    proportions = proportions[proportions > 0]
+    return -np.sum(proportions * np.log2(proportions))
+
+def compute_entropy_by_prompt(df, column):
+    entropy_scores = []
+    for prompt in df['prompt_type'].unique():
+        subset = df[df['prompt_type'] == prompt]
+        proportions = subset[column].value_counts(normalize=True)
+        entropy = shannon_entropy(proportions.values)
+        entropy_scores.append((prompt, column.capitalize(), entropy))
+    return entropy_scores
+
+gender_entropy = compute_entropy_by_prompt(df, 'gender')
+race_entropy = compute_entropy_by_prompt(df, 'race')
+entropy_data = pd.DataFrame(gender_entropy + race_entropy, columns=['Prompt Type', 'Category', 'Shannon Entropy'])
+
+print("Shannon Entropy (Diversity) per Prompt Type:\n")
+for element, row in entropy_data.iterrows():
+    print(f"Prompt Type: {row['Prompt Type']} | {row['Category']} Diversity: {row['Shannon Entropy']:.3f}")

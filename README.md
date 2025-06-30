@@ -8,5 +8,5 @@ This project investigates how prompt engineering using neutral, inclusive and co
 Methodology:
 - The models used to generate images were DALLE-3, Adobe Firefly, MidJourney, Leonardo, and Stable Diffusion;
 - The facial attributes (age, gender, race/ethnicity) were extracted and analysed using [DeepFace](https://github.com/serengil/deepface);
-- For statistical analysis, Kruskal-Wallis and Chi-Square tests were applied; 
+- For statistical analysis, Shannon Entropy test was applied; 
 - Visualisations were created using matplotlib and seaborn.
